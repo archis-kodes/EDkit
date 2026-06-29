@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete My Kit — Engineering Drawing Sale &amp; Resale</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" rel="stylesheet" />
+
+  <link rel="stylesheet" href="delete.css" />
+</head>
+<body>
+
+  <main class="container">
+    <div class="delete-card">
+      <div class="icon-circle">
+        <span class="material-symbols-outlined">delete</span>
+      </div>
+
+      <h1>Delete Your Listing</h1>
+      <p>Enter your registered WhatsApp number and secret code to remove your kit listing from our exchange.</p>
+
+      <form id="deleteForm" novalidate>
+        <div class="field">
+          <label for="whatsappInput">WhatsApp Number</label>
+          <div class="phone-input">
+            <span class="phone-prefix">+91</span>
+            <input type="tel" id="whatsappInput" placeholder="10-digit number" inputmode="numeric" maxlength="10" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="secretInput">Secret Code</label>
+          <input type="text" id="secretInput" placeholder="The code you set when listing" required />
+        </div>
+
+        <p id="formMessage" class="form-message" role="alert" hidden></p>
+
+        <button type="submit" id="submitBtn" class="btn btn-primary btn-block">
+          Delete my Kit <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </form>
+
+      <a href="index.html" class="back-link">
+        <span class="material-symbols-outlined">chevron_left</span> Back to My Listings
+      </a>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="delete.js"></script>
+</body>
+</html>

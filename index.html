@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineering Drawing Sale &amp; Resale</title>
+  <meta name="description" content="Buy and sell second-hand engineering drawing kits within your campus." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" rel="stylesheet" />
+
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- ===== Banner ===== -->
+  <header class="banner">
+    <img
+      src="banner.png"
+      alt="Engineering Drawing Sale & Resale"
+      class="banner-image"
+      width="1920"
+      height="800"
+    />
+
+  </header>
+
+  <main class="container">
+
+    <!-- ===== Toolbar ===== -->
+    <div class="toolbar">
+      <a href="list.html" class="btn btn-primary">
+        <span class="material-symbols-outlined">add_circle</span> List My Kit
+      </a>
+      <a href="delete.html" class="btn btn-secondary">
+        <span class="material-symbols-outlined">delete_sweep</span> Delete My Kit
+      </a>
+      <label class="search-wrap" for="searchInput">
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" id="searchInput" placeholder="Search by College" autocomplete="off" />
+      </label>
+      <button id="priceSortBtn" class="btn btn-outline" type="button" aria-label="Sort by price">
+        <span class="material-symbols-outlined">tune</span> <span id="priceSortLabel">Price</span>
+      </button>
+    </div>
+
+    <p id="statusMessage" class="status-message" role="status" hidden></p>
+
+    <!-- ===== Listings grid ===== -->
+    <section id="kitGrid" class="kit-grid" aria-live="polite"></section>
+
+    <div id="emptyState" class="empty-state" hidden>
+      <span class="material-symbols-outlined">inventory_2</span>
+      <p>No kits listed yet. Be the first to list one!</p>
+      <a href="list.html" class="btn btn-primary">List My Kit</a>
+    </div>
+
+    <div id="loaderState" class="loader-state" hidden>
+      <span class="spinner" aria-hidden="true"></span> Loading kits…
+    </div>
+
+    <button id="loadMoreBtn" class="btn btn-outline-block" type="button" hidden>Load More Kits</button>
+    <p id="countLabel" class="count-label"></p>
+
+    <!-- ===== Safety guide ===== -->
+    <section class="safety-guide">
+      <h2><span class="material-symbols-outlined">shield</span> Buying Safety Guide</h2>
+      <div class="safety-grid">
+        <div class="safety-item">
+          <span class="material-symbols-outlined">visibility</span>
+          <div>
+            <h3>Inspect In-Person</h3>
+            <p>Always meet in a public campus location to verify the kit's condition before paying.</p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <span class="material-symbols-outlined">fact_check</span>
+          <div>
+            <h3>Checklist First</h3>
+            <p>Use the itemized list in the post to ensure every compass and pencil is present.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
