@@ -1,423 +1,297 @@
 /* ===================================================================
    Engineering Drawing Sale & Resale — index.css
-      Design tokens lifted from the Industrial Exchange design system
-         =================================================================== */
+   Page-specific styles. Load shared.css first.
+   =================================================================== */
 
-         :root {
-           /* Colors */
-             --color-surface: #fcf9f8;
-               --color-surface-dim: #dcd9d9;
-                 --color-surface-container-lowest: #ffffff;
-                   --color-surface-container-low: #f6f3f2;
-                     --color-surface-container: #f0eded;
-                       --color-surface-container-high: #eae7e7;
-                         --color-on-surface: #1c1b1b;
-                           --color-on-surface-variant: #5b403d;
-                             --color-inverse-surface: #313030;
-                               --color-outline: #8f6f6c;
-                                 --color-outline-variant: #e4beba;
+/* ===== Banner ===== */
+.banner {
+  background: #fdf6e8;
+  border-bottom: 1px solid var(--color-outline-variant);
+  padding: var(--space-xl) var(--gutter);
+  text-align: center;
+}
 
-                                   --color-primary: #d32f2f;
-                                     --color-primary-dark: #af101a;
-                                       --color-on-primary: #ffffff;
+.banner-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
 
-                                         --color-secondary: #5d5f5f;
-                                           --color-secondary-container: #dfe0e0;
-                                             --color-on-secondary-container: #616363;
+.banner-title {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--color-on-surface);
+  font-size: clamp(22px, 7vw, 56px);
+  text-transform: uppercase;
+}
 
-                                               --color-highlight: #f8bd2a;
-                                                 --color-success: #1a7f37;
-                                                   --color-success-bg: #eaf6ec;
-                                                     --color-danger: #ba1a1a;
-                                                       --color-danger-bg: #ffdad6;
+.banner-tagline {
+  margin: 4px 0 0;
+  font-weight: 1000;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--color-primary);
+  font-size: clamp(22px, 5.5vw, 42px);
+  text-transform: uppercase;
+}
 
-                                                         /* Radius */
-                                                           --radius-sm: 0.125rem;
-                                                             --radius-md: 0.25rem;
-                                                               --radius-lg: 0.5rem;
-                                                                 --radius-xl: 0.75rem;
-                                                                   --radius-full: 9999px;
+.banner-channel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-md);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-on-primary);
+  background: var(--color-inverse-surface);
+  border-radius: var(--radius-full);
+  transition: background-color .15s ease, transform .15s ease;
+}
 
-                                                                     /* Spacing */
-                                                                       --space-xs: 4px;
-                                                                         --space-sm: 8px;
-                                                                           --space-md: 16px;
-                                                                             --space-lg: 24px;
-                                                                               --space-xl: 48px;
-                                                                                 --container-max: 1280px;
-                                                                                   --gutter: 20px;
-                                                                                   }
+.banner-channel-btn:hover {
+  background: var(--color-primary-dark);
+}
 
-                                                                                   * { box-sizing: border-box; }
+.banner-channel-btn .material-symbols-outlined {
+  font-size: 18px;
+}
 
-                                                                                   html, body {
-                                                                                     margin: 0;
-                                                                                       padding: 0;
-                                                                                         background: var(--color-surface);
-                                                                                           color: var(--color-on-surface);
-                                                                                             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-                                                                                             }
+@media (min-width: 768px) {
+  .banner { padding: var(--space-xl) var(--gutter) calc(var(--space-xl) + var(--space-sm)); }
+  .banner-channel-btn { font-size: 14px; padding: 10px 20px; }
+}
 
-                                                                                             img, svg { display: block; max-width: 100%; }
+/* ===== Layout ===== */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--gutter) var(--space-xl);
+}
 
-                                                                                             a { text-decoration: none; color: inherit; }
+/* ===== Toolbar ===== */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
 
-                                                                                             button { font-family: inherit; }
+.search-wrap {
+  flex: 1 1 200px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  padding: 0 12px;
+  min-width: 160px;
+}
 
-                                                                                             .material-symbols-outlined {
-                                                                                               font-size: 20px;
-                                                                                                 line-height: 1;
-                                                                                                   vertical-align: middle;
-                                                                                                   }
+.search-wrap .material-symbols-outlined { color: var(--color-outline); }
 
-                                                                                                   /* ===== Banner ===== */
-                                                                                                   .banner {
-                                                                                                     background: #fdf6e8;
-                                                                                                       border-bottom: 1px solid var(--color-outline-variant);
-                                                                                                       }
+.search-wrap input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 12px 0;
+  font-size: 14px;
+  width: 100%;
+  color: var(--color-on-surface);
+  font-family: inherit;
+}
 
-                                                                                                       .banner-image {
-                                                                                                         display: block;
-                                                                                                           width: 60%;
-                                                                                                             height: auto;
-                                                                                                               aspect-ratio: 1920 / 800;
-                                                                                                                 object-fit: cover;
-                                                                                                                 margin: 0 auto;
-                                                                                                                 }
+@media (min-width: 900px) {
+  .toolbar { align-items: center; }
+  .search-wrap { flex: 1 1 auto; }
+}
 
-                                                                                                                 .banner-text {
-                                                                                                                   text-align: center;
-                                                                                                                     padding: var(--space-lg) var(--gutter) var(--space-md);
-                                                                                                                     }
+/* ===== Empty / loader states ===== */
+.empty-state, .loader-state {
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+  color: var(--color-on-surface-variant);
+}
 
-                                                                                                                     .banner-text h1 {
-                                                                                                                       margin: 0 0 var(--space-xs);
-                                                                                                                         font-size: 24px;
-                                                                                                                           font-weight: 700;
-                                                                                                                             letter-spacing: -0.01em;
-                                                                                                                               line-height: 1.25;
-                                                                                                                               }
+.empty-state .material-symbols-outlined {
+  font-size: 40px;
+  color: var(--color-outline);
+  margin-bottom: var(--space-sm);
+}
 
-                                                                                                                               .banner-text h1 span {
-                                                                                                                                 color: var(--color-primary-dark);
-                                                                                                                                 }
+.empty-state .btn { margin-top: var(--space-md); }
 
-                                                                                                                                 .banner-text p {
-                                                                                                                                   margin: 0;
-                                                                                                                                     max-width: 480px;
-                                                                                                                                       color: var(--color-on-surface-variant);
-                                                                                                                                         font-size: 14px;
-                                                                                                                                         }
+/* ===== Kit grid / cards ===== */
+.kit-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
 
-                                                                                                                                         @media (min-width: 768px) {
-                                                                                                                                           .banner-text h1 { font-size: 32px; }
-                                                                                                                                             .banner-text p { font-size: 16px; }
-                                                                                                                                             }
+@media (min-width: 640px) {
+  .kit-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .kit-grid { grid-template-columns: repeat(3, 1fr); }
+}
 
-                                                                                                                                             /* ===== Layout ===== */
-                                                                                                                                             .container {
-                                                                                                                                               max-width: var(--container-max);
-                                                                                                                                                 margin: 0 auto;
-                                                                                                                                                   padding: var(--space-lg) var(--gutter) var(--space-xl);
-                                                                                                                                                   }
+.kit-card {
+  background: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .15s ease;
+}
+.kit-card:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
 
-                                                                                                                                                   /* ===== Toolbar ===== */
-                                                                                                                                                   .toolbar {
-                                                                                                                                                     display: flex;
-                                                                                                                                                       flex-wrap: wrap;
-                                                                                                                                                         gap: var(--space-sm);
-                                                                                                                                                           margin-bottom: var(--space-lg);
-                                                                                                                                                           }
+.kit-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
 
-                                                                                                                                                           .btn {
-                                                                                                                                                             display: inline-flex;
-                                                                                                                                                               align-items: center;
-                                                                                                                                                                 justify-content: center;
-                                                                                                                                                                   gap: 6px;
-                                                                                                                                                                     font-size: 13px;
-                                                                                                                                                                       font-weight: 600;
-                                                                                                                                                                         letter-spacing: 0.03em;
-                                                                                                                                                                           text-transform: uppercase;
-                                                                                                                                                                             padding: 12px 18px;
-                                                                                                                                                                               border-radius: var(--radius-md);
-                                                                                                                                                                                 border: 1px solid transparent;
-                                                                                                                                                                                   cursor: pointer;
-                                                                                                                                                                                     white-space: nowrap;
-                                                                                                                                                                                       transition: background-color .15s ease, border-color .15s ease, opacity .15s ease;
-                                                                                                                                                                                       }
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-container-high);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-outline);
+  flex-shrink: 0;
+}
 
-                                                                                                                                                                                       .btn-primary {
-                                                                                                                                                                                         background: var(--color-primary);
-                                                                                                                                                                                           color: var(--color-on-primary);
-                                                                                                                                                                                           }
-                                                                                                                                                                                           .btn-primary:hover { background: var(--color-primary-dark); }
+.kit-card-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
 
-                                                                                                                                                                                           .btn-secondary {
-                                                                                                                                                                                             background: var(--color-surface-container-high);
-                                                                                                                                                                                               color: var(--color-on-surface);
-                                                                                                                                                                                                 border-color: var(--color-surface-dim);
-                                                                                                                                                                                                 }
-                                                                                                                                                                                                 .btn-secondary:hover { background: var(--color-surface-dim); }
+.kit-card-header p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
 
-                                                                                                                                                                                                 .btn-outline {
-                                                                                                                                                                                                   background: var(--color-surface-container-lowest);
-                                                                                                                                                                                                     color: var(--color-on-surface-variant);
-                                                                                                                                                                                                       border-color: var(--color-outline-variant);
-                                                                                                                                                                                                       }
-                                                                                                                                                                                                       .btn-outline:hover { background: var(--color-surface-container-low); }
+.kit-card hr {
+  border: none;
+  border-top: 1px solid var(--color-surface-dim);
+  margin: var(--space-sm) 0;
+}
 
-                                                                                                                                                                                                       .btn-outline-block {
-                                                                                                                                                                                                         width: 100%;
-                                                                                                                                                                                                           background: var(--color-surface-container-lowest);
-                                                                                                                                                                                                             color: var(--color-primary);
-                                                                                                                                                                                                               border: 1px solid var(--color-primary);
-                                                                                                                                                                                                                 border-radius: var(--radius-md);
-                                                                                                                                                                                                                   padding: 14px;
-                                                                                                                                                                                                                     font-size: 13px;
-                                                                                                                                                                                                                       font-weight: 700;
-                                                                                                                                                                                                                         letter-spacing: 0.04em;
-                                                                                                                                                                                                                           text-transform: uppercase;
-                                                                                                                                                                                                                             cursor: pointer;
-                                                                                                                                                                                                                             }
-                                                                                                                                                                                                                             .btn-outline-block:hover { background: var(--color-danger-bg); }
-                                                                                                                                                                                                                             .btn-outline-block:disabled { opacity: .5; cursor: default; }
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
 
-                                                                                                                                                                                                                             .search-wrap {
-                                                                                                                                                                                                                               flex: 1 1 200px;
-                                                                                                                                                                                                                                 display: flex;
-                                                                                                                                                                                                                                   align-items: center;
-                                                                                                                                                                                                                                     gap: 8px;
-                                                                                                                                                                                                                                       background: var(--color-surface-container-low);
-                                                                                                                                                                                                                                         border: 1px solid var(--color-outline-variant);
-                                                                                                                                                                                                                                           border-radius: var(--radius-md);
-                                                                                                                                                                                                                                             padding: 0 12px;
-                                                                                                                                                                                                                                               min-width: 160px;
-                                                                                                                                                                                                                                               }
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
 
-                                                                                                                                                                                                                                               .search-wrap .material-symbols-outlined { color: var(--color-outline); }
+.checklist li.included { color: var(--color-on-surface); }
+.checklist li.included .material-symbols-outlined { color: var(--color-success); font-size: 18px; }
 
-                                                                                                                                                                                                                                               .search-wrap input {
-                                                                                                                                                                                                                                                 border: none;
-                                                                                                                                                                                                                                                   background: transparent;
-                                                                                                                                                                                                                                                     outline: none;
-                                                                                                                                                                                                                                                       padding: 12px 0;
-                                                                                                                                                                                                                                                         font-size: 14px;
-                                                                                                                                                                                                                                                           width: 100%;
-                                                                                                                                                                                                                                                             color: var(--color-on-surface);
-                                                                                                                                                                                                                                                               font-family: inherit;
-                                                                                                                                                                                                                                                               }
+.checklist li.excluded { color: var(--color-outline); }
+.checklist li.excluded .material-symbols-outlined { color: var(--color-danger); font-size: 18px; }
 
-                                                                                                                                                                                                                                                               @media (min-width: 900px) {
-                                                                                                                                                                                                                                                                 .toolbar { align-items: center; }
-                                                                                                                                                                                                                                                                   .search-wrap { flex: 1 1 auto; }
-                                                                                                                                                                                                                                                                   }
+.kit-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
 
-                                                                                                                                                                                                                                                                   /* ===== Status / empty / loader ===== */
-                                                                                                                                                                                                                                                                   .status-message {
-                                                                                                                                                                                                                                                                     background: var(--color-danger-bg);
-                                                                                                                                                                                                                                                                       color: var(--color-danger);
-                                                                                                                                                                                                                                                                         border: 1px solid var(--color-danger);
-                                                                                                                                                                                                                                                                           border-radius: var(--radius-md);
-                                                                                                                                                                                                                                                                             padding: var(--space-sm) var(--space-md);
-                                                                                                                                                                                                                                                                               margin-bottom: var(--space-md);
-                                                                                                                                                                                                                                                                                 font-size: 14px;
-                                                                                                                                                                                                                                                                                 }
+.price-block { display: flex; flex-direction: column; }
 
-                                                                                                                                                                                                                                                                                 .empty-state, .loader-state {
-                                                                                                                                                                                                                                                                                   text-align: center;
-                                                                                                                                                                                                                                                                                     padding: var(--space-xl) var(--space-md);
-                                                                                                                                                                                                                                                                                       color: var(--color-on-surface-variant);
-                                                                                                                                                                                                                                                                                       }
+.price-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant);
+}
 
-                                                                                                                                                                                                                                                                                       .empty-state .material-symbols-outlined {
-                                                                                                                                                                                                                                                                                         font-size: 40px;
-                                                                                                                                                                                                                                                                                           color: var(--color-outline);
-                                                                                                                                                                                                                                                                                             margin-bottom: var(--space-sm);
-                                                                                                                                                                                                                                                                                             }
+.price-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
 
-                                                                                                                                                                                                                                                                                             .empty-state .btn { margin-top: var(--space-md); }
+.kit-card-footer .btn {
+  padding: 10px 18px;
+}
 
-                                                                                                                                                                                                                                                                                             .spinner {
-                                                                                                                                                                                                                                                                                               display: inline-block;
-                                                                                                                                                                                                                                                                                                 width: 16px;
-                                                                                                                                                                                                                                                                                                   height: 16px;
-                                                                                                                                                                                                                                                                                                     border: 2px solid var(--color-outline-variant);
-                                                                                                                                                                                                                                                                                                       border-top-color: var(--color-primary);
-                                                                                                                                                                                                                                                                                                         border-radius: 50%;
-                                                                                                                                                                                                                                                                                                           animation: spin 0.7s linear infinite;
-                                                                                                                                                                                                                                                                                                             vertical-align: middle;
-                                                                                                                                                                                                                                                                                                               margin-right: 6px;
-                                                                                                                                                                                                                                                                                                               }
-                                                                                                                                                                                                                                                                                                               @keyframes spin { to { transform: rotate(360deg); } }
+.count-label {
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+  margin: var(--space-sm) 0 var(--space-xl);
+}
 
-                                                                                                                                                                                                                                                                                                               /* ===== Kit grid / cards ===== */
-                                                                                                                                                                                                                                                                                                               .kit-grid {
-                                                                                                                                                                                                                                                                                                                 display: grid;
-                                                                                                                                                                                                                                                                                                                   grid-template-columns: 1fr;
-                                                                                                                                                                                                                                                                                                                     gap: var(--space-md);
-                                                                                                                                                                                                                                                                                                                       margin-bottom: var(--space-md);
-                                                                                                                                                                                                                                                                                                                       }
+/* ===== Safety guide ===== */
+.safety-guide {
+  background: var(--color-primary-dark);
+  color: var(--color-on-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
 
-                                                                                                                                                                                                                                                                                                                       @media (min-width: 640px) {
-                                                                                                                                                                                                                                                                                                                         .kit-grid { grid-template-columns: repeat(2, 1fr); }
-                                                                                                                                                                                                                                                                                                                         }
-                                                                                                                                                                                                                                                                                                                         @media (min-width: 1024px) {
-                                                                                                                                                                                                                                                                                                                           .kit-grid { grid-template-columns: repeat(3, 1fr); }
-                                                                                                                                                                                                                                                                                                                           }
+.safety-guide h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 var(--space-md);
+  font-size: 18px;
+}
 
-                                                                                                                                                                                                                                                                                                                           .kit-card {
-                                                                                                                                                                                                                                                                                                                             background: var(--color-surface-container-lowest);
-                                                                                                                                                                                                                                                                                                                               border: 1px solid var(--color-outline-variant);
-                                                                                                                                                                                                                                                                                                                                 border-radius: var(--radius-md);
-                                                                                                                                                                                                                                                                                                                                   padding: var(--space-md);
-                                                                                                                                                                                                                                                                                                                                     display: flex;
-                                                                                                                                                                                                                                                                                                                                       flex-direction: column;
-                                                                                                                                                                                                                                                                                                                                         transition: box-shadow .15s ease;
-                                                                                                                                                                                                                                                                                                                                         }
-                                                                                                                                                                                                                                                                                                                                         .kit-card:hover {
-                                                                                                                                                                                                                                                                                                                                           box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-                                                                                                                                                                                                                                                                                                                                           }
+.safety-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
 
-                                                                                                                                                                                                                                                                                                                                           .kit-card-header {
-                                                                                                                                                                                                                                                                                                                                             display: flex;
-                                                                                                                                                                                                                                                                                                                                               align-items: center;
-                                                                                                                                                                                                                                                                                                                                                 gap: var(--space-sm);
-                                                                                                                                                                                                                                                                                                                                                 }
+@media (min-width: 768px) {
+  .safety-grid { grid-template-columns: 1fr 1fr; }
+}
 
-                                                                                                                                                                                                                                                                                                                                                 .avatar {
-                                                                                                                                                                                                                                                                                                                                                   width: 36px;
-                                                                                                                                                                                                                                                                                                                                                     height: 36px;
-                                                                                                                                                                                                                                                                                                                                                       border-radius: var(--radius-md);
-                                                                                                                                                                                                                                                                                                                                                         background: var(--color-surface-container-high);
-                                                                                                                                                                                                                                                                                                                                                           display: flex;
-                                                                                                                                                                                                                                                                                                                                                             align-items: center;
-                                                                                                                                                                                                                                                                                                                                                               justify-content: center;
-                                                                                                                                                                                                                                                                                                                                                                 color: var(--color-outline);
-                                                                                                                                                                                                                                                                                                                                                                   flex-shrink: 0;
-                                                                                                                                                                                                                                                                                                                                                                   }
+.safety-item {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+}
 
-                                                                                                                                                                                                                                                                                                                                                                   .kit-card-header h3 {
-                                                                                                                                                                                                                                                                                                                                                                     margin: 0;
-                                                                                                                                                                                                                                                                                                                                                                       font-size: 15px;
-                                                                                                                                                                                                                                                                                                                                                                         font-weight: 600;
-                                                                                                                                                                                                                                                                                                                                                                         }
+.safety-item h3 {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
 
-                                                                                                                                                                                                                                                                                                                                                                         .kit-card-header p {
-                                                                                                                                                                                                                                                                                                                                                                           margin: 2px 0 0;
-                                                                                                                                                                                                                                                                                                                                                                             font-size: 13px;
-                                                                                                                                                                                                                                                                                                                                                                               color: var(--color-on-surface-variant);
-                                                                                                                                                                                                                                                                                                                                                                               }
+.safety-item p {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
 
-                                                                                                                                                                                                                                                                                                                                                                               .kit-card hr {
-                                                                                                                                                                                                                                                                                                                                                                                 border: none;
-                                                                                                                                                                                                                                                                                                                                                                                   border-top: 1px solid var(--color-surface-dim);
-                                                                                                                                                                                                                                                                                                                                                                                     margin: var(--space-sm) 0;
-                                                                                                                                                                                                                                                                                                                                                                                     }
-
-                                                                                                                                                                                                                                                                                                                                                                                     .checklist {
-                                                                                                                                                                                                                                                                                                                                                                                       list-style: none;
-                                                                                                                                                                                                                                                                                                                                                                                         margin: 0;
-                                                                                                                                                                                                                                                                                                                                                                                           padding: 0;
-                                                                                                                                                                                                                                                                                                                                                                                             display: flex;
-                                                                                                                                                                                                                                                                                                                                                                                               flex-direction: column;
-                                                                                                                                                                                                                                                                                                                                                                                                 gap: 6px;
-                                                                                                                                                                                                                                                                                                                                                                                                   flex: 1;
-                                                                                                                                                                                                                                                                                                                                                                                                   }
-
-                                                                                                                                                                                                                                                                                                                                                                                                   .checklist li {
-                                                                                                                                                                                                                                                                                                                                                                                                     display: flex;
-                                                                                                                                                                                                                                                                                                                                                                                                       align-items: center;
-                                                                                                                                                                                                                                                                                                                                                                                                         gap: 8px;
-                                                                                                                                                                                                                                                                                                                                                                                                           font-size: 14px;
-                                                                                                                                                                                                                                                                                                                                                                                                           }
-
-                                                                                                                                                                                                                                                                                                                                                                                                           .checklist li.included { color: var(--color-on-surface); }
-                                                                                                                                                                                                                                                                                                                                                                                                           .checklist li.included .material-symbols-outlined { color: var(--color-success); font-size: 18px; }
-
-                                                                                                                                                                                                                                                                                                                                                                                                           .checklist li.excluded { color: var(--color-outline); }
-                                                                                                                                                                                                                                                                                                                                                                                                           .checklist li.excluded .material-symbols-outlined { color: var(--color-danger); font-size: 18px; }
-
-                                                                                                                                                                                                                                                                                                                                                                                                           .kit-card-footer {
-                                                                                                                                                                                                                                                                                                                                                                                                             display: flex;
-                                                                                                                                                                                                                                                                                                                                                                                                               align-items: center;
-                                                                                                                                                                                                                                                                                                                                                                                                                 justify-content: space-between;
-                                                                                                                                                                                                                                                                                                                                                                                                                   gap: var(--space-sm);
-                                                                                                                                                                                                                                                                                                                                                                                                                   }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                   .price-block { display: flex; flex-direction: column; }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                   .price-label {
-                                                                                                                                                                                                                                                                                                                                                                                                                     font-size: 11px;
-                                                                                                                                                                                                                                                                                                                                                                                                                       font-weight: 600;
-                                                                                                                                                                                                                                                                                                                                                                                                                         letter-spacing: 0.05em;
-                                                                                                                                                                                                                                                                                                                                                                                                                           text-transform: uppercase;
-                                                                                                                                                                                                                                                                                                                                                                                                                             color: var(--color-on-surface-variant);
-                                                                                                                                                                                                                                                                                                                                                                                                                             }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                             .price-value {
-                                                                                                                                                                                                                                                                                                                                                                                                                               font-size: 20px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                 font-weight: 700;
-                                                                                                                                                                                                                                                                                                                                                                                                                                   color: var(--color-primary-dark);
-                                                                                                                                                                                                                                                                                                                                                                                                                                   }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                   .kit-card-footer .btn {
-                                                                                                                                                                                                                                                                                                                                                                                                                                     padding: 10px 18px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                     }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                     .count-label {
-                                                                                                                                                                                                                                                                                                                                                                                                                                       text-align: center;
-                                                                                                                                                                                                                                                                                                                                                                                                                                         font-size: 13px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                           color: var(--color-on-surface-variant);
-                                                                                                                                                                                                                                                                                                                                                                                                                                             margin: var(--space-sm) 0 var(--space-xl);
-                                                                                                                                                                                                                                                                                                                                                                                                                                             }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                             /* ===== Safety guide ===== */
-                                                                                                                                                                                                                                                                                                                                                                                                                                             .safety-guide {
-                                                                                                                                                                                                                                                                                                                                                                                                                                               background: var(--color-primary-dark);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                 color: var(--color-on-primary);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                   border-radius: var(--radius-lg);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                     padding: var(--space-lg);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                     }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                     .safety-guide h2 {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                       display: flex;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                         align-items: center;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                           gap: 8px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                             margin: 0 0 var(--space-md);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                               font-size: 18px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                               }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                               .safety-grid {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                 display: grid;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                   grid-template-columns: 1fr;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                     gap: var(--space-md);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                     }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @media (min-width: 768px) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                       .safety-grid { grid-template-columns: 1fr 1fr; }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                       }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                       .safety-item {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                         display: flex;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                           gap: var(--space-sm);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                             align-items: flex-start;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                             }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                             .safety-item h3 {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                               margin: 0 0 4px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 font-size: 14px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 .safety-item p {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   margin: 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     font-size: 13px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       opacity: 0.9;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         line-height: 1.5;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         .site-footer {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           text-align: center;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             font-size: 12px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               color: var(--color-on-surface-variant);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 padding: var(--space-md);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 }
+.site-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+  padding: var(--space-md);
+}
