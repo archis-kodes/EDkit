@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F4F1EA" />
+  <title>Engineering Drawing Sale &amp; Resale</title>
+  <meta name="description" content="Buy and sell second-hand engineering drawing kits within your campus." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- ===== Banner ===== -->
+  <header class="banner">
+    <div class="banner-inner">
+      <div class="banner-content">
+        <h1 class="banner-title">Engineering<br><span class="hl">Drawing</span> Kit</h1>
+        <p class="banner-tagline"><span>Sale &amp; Resale</span></p>
+
+        <div class="channel-cta">
+          <span class="cta-hint" aria-hidden="true">
+            <span class="cta-note">psst… click me!</span>
+            <svg class="cta-arrow" viewBox="0 0 60 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9C15 1 34 3 51 21"/>
+              <path d="M41.5 21.5L52 22.5 49.5 12"/>
+            </svg>
+          </span>
+          <a
+            href="https://youtube.com/@CYBERARCHIS"
+            target="_blank"
+            rel="noopener"
+            class="banner-channel-btn"
+            aria-label="Visit the CYBER ARCHIS YouTube channel"
+          >
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-play-circle"></use></svg>
+            <span>by CYBER ARCHIS</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Doodle: drafting set -->
+      <svg class="banner-doodle" viewBox="0 0 260 230" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="#0E2A5C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <!-- set square -->
+          <path d="M22 196L26 46 158 192Z" fill="#FFFFA5"/>
+          <path d="M48 170L50 98 106 168Z" fill="#F4F1EA"/>
+          <path d="M26 70h8M26 94h12M26 118h8M26 142h12M26 166h8" stroke-width="2"/>
+          <!-- compass -->
+          <path d="M196 30c0-9 9-12 13-6s-2 12-9 11" stroke-width="3"/>
+          <path d="M198 36L158 178"/>
+          <path d="M198 36l32 142"/>
+          <path d="M158 178l-3 14M230 178l2 8" stroke-width="3"/>
+          <path d="M184 112l28 6" stroke-width="2"/>
+          <!-- drawn arc -->
+          <path d="M146 200c22 12 62 12 92-2" stroke="#D12828" stroke-dasharray="2 9" stroke-width="3.2"/>
+          <!-- pencil -->
+          <g transform="rotate(-24 120 36)">
+            <path d="M70 26h92v20H70z" fill="#FFFFA5"/>
+            <path d="M162 26l22 10-22 10z" fill="#F4F1EA"/>
+            <path d="M176 32l8 4-8 4" stroke="#D12828" stroke-width="2.4"/>
+            <path d="M70 26h-12a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4h12z" fill="#D12828"/>
+            <path d="M90 26v20M96 26v20" stroke-width="1.8"/>
+          </g>
+        </g>
+        <!-- little sparkles -->
+        <g stroke="#D12828" stroke-width="2.6" stroke-linecap="round">
+          <path d="M236 70v14M229 77h14"/>
+          <path d="M120 120v10M115 125h10" stroke-width="2"/>
+        </g>
+      </svg>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== Toolbar ===== -->
+    <div class="toolbar">
+      <a href="list.html" class="btn btn-primary btn-action">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-plus-circle"></use></svg>
+        List My Kit
+      </a>
+      <a href="manage.html" class="btn btn-secondary btn-action">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-eye-off"></use></svg>
+        Manage My Kit
+      </a>
+      <label class="search-wrap" for="searchInput">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-search"></use></svg>
+        <input type="search" id="searchInput" placeholder="Search by College" autocomplete="off" />
+      </label>
+      <button id="priceSortBtn" class="btn btn-secondary btn-sort" type="button" aria-label="Sort by price">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-sliders"></use></svg>
+        <span id="priceSortLabel">Price</span>
+      </button>
+    </div>
+
+    <p id="statusMessage" class="status-message" role="status" hidden></p>
+
+    <!-- ===== Listings grid ===== -->
+    <section id="kitGrid" class="kit-grid" aria-live="polite"></section>
+
+    <div id="emptyState" class="empty-state" hidden>
+      <div class="empty-icon">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-box"></use></svg>
+      </div>
+      <p>No kits listed yet. Be the first to list one!</p>
+      <a href="list.html" class="btn btn-primary">List My Kit</a>
+    </div>
+
+    <!-- Skeleton cards are injected here by index.js while loading -->
+    <div id="loaderState" class="kit-grid" aria-hidden="true" hidden></div>
+
+    <button id="loadMoreBtn" class="btn btn-outline-block" type="button" hidden>Load More Kits</button>
+    <p id="countLabel" class="count-label"></p>
+
+    <!-- ===== Safety guide ===== -->
+    <section class="safety-guide">
+      <h2>
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-shield"></use></svg>
+        Buying <span class="hl">Safety</span> Guide
+      </h2>
+      <div class="safety-grid">
+        <div class="safety-item">
+          <span class="safety-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-eye"></use></svg></span>
+          <div>
+            <h3>Inspect In-Person</h3>
+            <p>Always meet in a public campus location to verify the kit's condition before paying.</p>
+          </div>
+        </div>
+        <div class="safety-item">
+          <span class="safety-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-clipboard"></use></svg></span>
+          <div>
+            <h3>Checklist First</h3>
+            <p>Use the itemized list in the post to ensure every compass and pencil is present.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="shared.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

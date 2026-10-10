@@ -1,0 +1,110 @@
+/* ===================================================================
+   Engineering Drawing Sale & Resale — list.css
+   Page-specific styles. Load shared.css first.
+   =================================================================== */
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.75rem var(--pad-right) 3rem var(--pad-left);
+}
+
+.form-section { margin-bottom: 1.75rem; }
+
+.form-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  font-size: 1.7rem;
+}
+
+/* hand-drawn marker tick before each section title */
+.form-section h2 .bar {
+  display: inline-block;
+  width: 7px;
+  height: 1.3rem;
+  background: var(--accent);
+  border-radius: 4px 2px 5px 3px / 3px 5px 2px 4px;
+  rotate: 6deg;
+}
+
+.section-heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.section-heading-row h2 { margin-bottom: 1rem; }
+
+.hint-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent-dark);
+  white-space: nowrap;
+}
+
+/* ===== Checklist (interactive form version) ===== */
+.checklist-form {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.55rem;
+}
+
+.checklist-form li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 52px;
+  padding: 0.55rem 0.95rem;
+  font-size: 1.2rem;
+  color: var(--ink);
+  background: var(--paper-card);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--r-sketch);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.checklist-form li:nth-child(even) { border-radius: var(--r-sketch-alt); }
+.checklist-form li:hover { background: rgba(255, 255, 160, 0.55); }
+.checklist-form li:active { transform: translateY(1px); }
+
+.checklist-form li .icon { width: 1.5rem; height: 1.5rem; color: rgba(14, 42, 92, 0.45); }
+
+/* checked = highlighter swipe + blue pen tick */
+.checklist-form li.checked {
+  font-weight: 600;
+  background: var(--note);
+}
+.checklist-form li.checked .icon { color: var(--pen); }
+
+@media (min-width: 560px) {
+  .checklist-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ===== Disclaimer ===== */
+.disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--graphite);
+  background: var(--paper-card);
+  border: 1.5px dashed var(--ink-soft);
+  border-radius: var(--r-sketch);
+}
+.disclaimer .icon { margin-top: 0.1rem; color: var(--accent); }
+
+@media (min-width: 768px) {
+  .container { padding-top: 2.5rem; }
+}

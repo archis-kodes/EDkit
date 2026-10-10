@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F4F1EA" />
+  <title>Manage My Kit — Engineering Drawing Sale &amp; Resale</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="manage.css" />
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <a href="index.html" class="back-link">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-arrow-left"></use></svg>
+        Back to Listings
+      </a>
+      <h1>Manage My <span class="hl">Kit</span></h1>
+      <p>Enter your registered WhatsApp number and secret code to hide or show your kit listing. Nothing is deleted, so you can bring it back anytime.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="manage-card">
+      <div class="icon-circle">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-eye-off"></use></svg>
+      </div>
+
+      <!-- Step 1: prove it's your listing -->
+      <form id="manageForm" novalidate>
+        <div class="field">
+          <label for="whatsappInput">WhatsApp Number</label>
+          <div class="phone-input">
+            <span class="phone-prefix">+91</span>
+            <input type="tel" id="whatsappInput" placeholder="10-digit number" inputmode="numeric" autocomplete="tel-national" maxlength="10" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="secretInput">Secret Code</label>
+          <input type="text" id="secretInput" placeholder="The code you set when listing" autocomplete="off" maxlength="64" required />
+        </div>
+
+        <p id="formMessage" class="form-message" role="alert" hidden></p>
+
+        <button type="submit" id="submitBtn" class="btn btn-primary btn-block">
+          Find my Kit
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-arrow-right"></use></svg>
+        </button>
+      </form>
+
+      <!-- Step 2: flip the switch on each listing -->
+      <section id="resultPanel" class="result-panel" hidden>
+        <p class="result-intro">Flip the switch to hide or show a listing. Hidden kits disappear from the site but stay saved.</p>
+        <ul id="resultList" class="result-list"></ul>
+        <p id="resultMessage" class="form-message" role="status" hidden></p>
+        <button id="backBtn" type="button" class="btn btn-secondary btn-block">Check another number</button>
+      </section>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+  <script src="manage.js"></script>
+</body>
+</html>

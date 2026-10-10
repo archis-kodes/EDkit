@@ -1,0 +1,10 @@
+{
+  "name": "edkit",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Engineering Drawing Kit Sale & Resale — static site + Vercel functions + Turso",
+  "dependencies": {
+    "@libsql/client": "^0.15.0"
+  }
+}

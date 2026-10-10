@@ -1,36 +1,13 @@
 /* ===================================================================
    Engineering Drawing Sale & Resale — list.js
-   Inserts a new kit listing into Supabase.
+   Posts a new kit listing to /api/list (new listings start as active).
    =================================================================== */
 
-// ---------- 1. SUPABASE CONFIG — fill these in ----------
-
-const SUPABASE_URL = "https://sjjmkjnnzccidsutgxhl.supabase.co"; // e.g. https://xxxxx.supabase.co
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqam1ram5uemNjaWRzdXRneGhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NTAzMzgsImV4cCI6MjA5ODMyNjMzOH0.NOLVNflOx2LTTfI7kCTH84PWWCI1NdVOiQPt3IEVo10";
-const TABLE_NAME = "kits";
-
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// ---------- 2. Checklist definition (must match index.js / DB columns) ----------
-const CHECKLIST_ITEMS = [
-  { key: "drafter", label: "Drafter" },
-  { key: "scale", label: "Scale" },
-  { key: "roll_and_draw", label: "Roll and Draw" },
-  { key: "pencils", label: "Pencils" },
-  { key: "compass", label: "Compass" },
-  { key: "protector", label: "Protector" },
-  { key: "set_squares", label: "Set Squares" },
-  { key: "french_curves", label: "French Curves" },
-  { key: "clips", label: "Clips" },
-  { key: "drawing_notebook", label: "Drawing Notebook" },
-  { key: "chart_paper_holder", label: "Chart Paper Holder" },
-];
-
-// ---------- 3. State: which items are currently checked ----------
+// ---------- State: which items are currently checked ----------
 const checkedState = {};
 CHECKLIST_ITEMS.forEach((item) => (checkedState[item.key] = false));
 
-// ---------- 4. DOM refs ----------
+// ---------- DOM refs ----------
 const checklistEl = document.getElementById("checklist");
 const form = document.getElementById("listForm");
 const nameInput = document.getElementById("nameInput");
@@ -41,7 +18,9 @@ const secretInput = document.getElementById("secretInput");
 const formError = document.getElementById("formError");
 const submitBtn = document.getElementById("submitBtn");
 
-// ---------- 5. Render checklist toggle rows ----------
+const SUBMIT_LABEL = `List my Kit ${icon("pencil")}`;
+
+// ---------- Render checklist toggle rows ----------
 function renderChecklist() {
   checklistEl.innerHTML = "";
   CHECKLIST_ITEMS.forEach((item) => {
@@ -54,12 +33,9 @@ function renderChecklist() {
     const label = document.createElement("span");
     label.textContent = item.label;
 
-    const icon = document.createElement("span");
-    icon.className = "material-symbols-outlined";
-    icon.textContent = "radio_button_unchecked";
-
     li.appendChild(label);
-    li.appendChild(icon);
+    li.insertAdjacentHTML("beforeend", icon("circle"));
+    const iconEl = li.querySelector("svg");
     checklistEl.appendChild(li);
 
     const toggle = () => {
@@ -67,7 +43,7 @@ function renderChecklist() {
       const isChecked = checkedState[item.key];
       li.classList.toggle("checked", isChecked);
       li.setAttribute("aria-pressed", String(isChecked));
-      icon.textContent = isChecked ? "check_circle" : "radio_button_unchecked";
+      setIcon(iconEl, isChecked ? "check-circle" : "circle");
     };
 
     li.addEventListener("click", toggle);
@@ -81,22 +57,14 @@ function renderChecklist() {
 }
 
 renderChecklist();
-
-// Only allow digits in the WhatsApp field
-whatsappInput.addEventListener("input", () => {
-  whatsappInput.value = whatsappInput.value.replace(/\D/g, "").slice(0, 10);
-});
+bindDigitsOnly(whatsappInput);
 
 function showError(message) {
-  if (!message) {
-    formError.hidden = true;
-    return;
-  }
-  formError.textContent = message;
-  formError.hidden = false;
+  formError.textContent = message || "";
+  formError.hidden = !message;
 }
 
-// ---------- 6. Submit handler ----------
+// ---------- Submit handler ----------
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   showError("");
@@ -124,28 +92,26 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  const payload = {
-    name,
-    college,
-    whatsapp: "91" + whatsappDigits,
-    price: Number(price),
-    secret_code: secretCode,
-    ...checkedState,
-  };
-
   submitBtn.disabled = true;
-  submitBtn.innerHTML = "Listing…";
+  submitBtn.textContent = "Listing…";
 
   try {
-    const { error } = await supabaseClient.from(TABLE_NAME).insert(payload);
-    if (error) throw error;
-
+    await apiRequest("/api/list", {
+      method: "POST",
+      body: {
+        name,
+        college,
+        whatsapp: whatsappDigits,
+        price: Number(price),
+        secret: secretCode,
+        ...checkedState,
+      },
+    });
     window.location.href = "index.html";
   } catch (err) {
     console.error(err);
-    showError("Couldn't list your kit. Check your connection and try again.");
+    showError(err.message || "Couldn't list your kit. Check your connection and try again.");
     submitBtn.disabled = false;
-    submitBtn.innerHTML =
-      'List my Kit <span class="material-symbols-outlined">rocket_launch</span>';
+    submitBtn.innerHTML = SUBMIT_LABEL;
   }
 });
